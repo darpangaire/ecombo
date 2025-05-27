@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="bg-light py-5">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-8 col-lg-6">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <h4 class="card-title text-center mb-4">LogIn</h4>
+
+            {% include 'includes/alerts.html' %}
+
+            <form action="{% url 'login' %}" method="POST">
+              {% csrf_token %}
+
+              <div class="row mb-3">
+                <div class="col">
+                  <label for="email" class="form-label">Email Address</label>
+                  <input type="email" name="email" id="email" placeholder="Enter email address" class="form-control">
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <div class="col">
+                  <label for="password" class="form-label">Enter Password</label>
+                  <input type="password" name="password" id="password" class="form-control">
+                </div>
+                
+              </div>
+
+              <div class="text-center mb-3">
+                <button type="submit" class="btn btn-primary px-4">login</button>
+              </div>
+
+            </form>
+
+            <p class="text-center mt-4">
+              Create an Account| 
+              <a href="{% url 'register'%}" class="text-decoration-none text-primary" >Register</a>
+            </p>
+            
+
+              <div class="text-center mt-4">
+                <a href="{% url 'change_password'%}" class="text-decoration-none text-primary" >Forget Password</a>
+              </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

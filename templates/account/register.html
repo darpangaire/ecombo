@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="bg-light py-5">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-8 col-lg-6">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <h4 class="card-title text-center mb-4">Sign Up</h4>
+
+            {% include 'includes/alerts.html' %}
+
+            <form action="{% url 'register' %}" method="POST">
+              {% csrf_token %}
+
+              <div class="row mb-3">
+                <div class="col">
+                  <label for="first_name" class="form-label">First Name</label>
+                  {{ form.first_name }}
+                </div>
+                <div class="col">
+                  <label for="last_name" class="form-label">Last Name</label>
+                  {{ form.last_name }}
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <div class="col">
+                  <label for="email" class="form-label">Email Address</label>
+                  {{ form.email }}
+                </div>
+                <div class="col">
+                  <label for="phone_number" class="form-label">Phone Number</label>
+                  {{ form.phone_number }}
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <div class="col">
+                  <label for="password1" class="form-label">Create Password</label>
+                  {{ form.password1 }}
+                </div>
+                <div class="col">
+                  <label for="password2" class="form-label">Repeat Password</label>
+                  {{ form.password2 }}
+                </div>
+              </div>
+
+              <div class="text-center mb-3">
+                <button type="submit" class="btn btn-primary px-4">Register</button>
+              </div>
+
+              {% if form.errors %}
+                <div class="alert alert-danger">
+                  <ul class="mb-0">
+                    {% for field in form %}
+                      {% for error in field.errors %}
+                        <li>{{error}}</li>
+                      {% endfor %}
+                    {% endfor %}
+                    {% for error in form.non_field_errors %}
+                      <li>{{error}}</li>
+                    {% endfor %}
+                  </ul>
+                </div>
+              {% endif %}
+
+
+
+            </form>
+
+            <p class="text-center mt-4">
+              Already have an account?
+              <a href="{% url 'login' %}" class="text-decoration-none text-primary">Log In</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
