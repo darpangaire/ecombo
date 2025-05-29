@@ -5,6 +5,7 @@ from django.contrib import messages
 from .models import Account
 from django.contrib.auth import login,authenticate,logout
 from django.contrib.auth.models import auth
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 def view_register(request):
@@ -71,8 +72,22 @@ def change_password(request):
       messages.error(request,"Password doesnot Match!")
       return redirect('change_password')
     
-    user.password = new_password
+    user.set_password(new_password)
+    user.save()
+    
+    messages.success(request,'Password changed successfully! please login...')
     return redirect('login')
+  
+@login_required(login_url='login')
+def logout(request):
+  auth.logout(request)
+  messages.success(request,"You are logged out")
+  return redirect('login')
+
+  
+
+  
+  
   
 
       
