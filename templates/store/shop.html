@@ -1,0 +1,36 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+
+{% if products %}
+{% for product in products %}
+<h2>{{product.name}}</h2>
+<!-- Group all variants by color and sizes -->
+ {% with product.variants.all as variants %}
+  <form action="" method="POST">
+            <!-- Colors -->
+        <div class="form-group">
+          <label for="colorSelect{{ forloop.counter }}">Color:</label>
+          <select class="form-control" id="colorSelect{{ forloop.counter }}" name="color">
+            {% for variant in variants %}
+              <option value="{{ variant.color.id }}">{{ variant.color.name }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+                <!-- Sizes -->
+        <div class="form-group">
+          <label for="sizeSelect{{ forloop.counter }}">Size:</label>
+          <select class="form-control" id="sizeSelect{{ forloop.counter }}" name="size">
+            {% for variant in variants %}
+              <option value="{{ variant.size.id }}">{{ variant.size.name }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <button type="button" class="btn btn-primary">Add to the cart</button>
+  </form>
+      {% endwith %}
+{% endfor %}
+{% else %}
+<h1>NO ITEMS</h1>
+{%endif%}
+
+{% endblock %}
