@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+  {% if cartItems %}
+    {% for item in cartItems %}
+    <h3>Product Name: {{item.product_variant.product.name}}</h3>
+    <h4>Product Quantity {{item.quantity}}</h4>
+    <h4>Product color {{item.product_variant.color.name}}</h4>
+    <h4>Product size {{item.product_variant.size.name}}</h4>
+    <h4>Product price {{item.total_price}}</h4>
+    <br><br>
+
+    {% endfor %}
+  {% else %}
+  <h2>No cart Items</h2>
+
+  {% endif %}
+
+{% endblock %}
+

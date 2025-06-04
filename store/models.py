@@ -31,6 +31,7 @@ class Product(models.Model):
 
 class Color(models.Model):
     name = models.CharField(max_length=50)
+    # size = models.ForeignKey(Size,on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
@@ -38,6 +39,7 @@ class Color(models.Model):
 
 class Size(models.Model):
     name = models.CharField(max_length=10)  # e.g., S, M, L, XL
+    # color=models.Fore(Color,on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
